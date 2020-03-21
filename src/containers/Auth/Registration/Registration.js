@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import classes from './Registration.module.css';
 import {Button} from 'react-bootstrap';
 import Input from '../../../components/UI/Input/Input';
+import axios from 'axios';
+import * as actions from '../../../store/actions/index';
 
 class Registration extends Component {
 
@@ -62,12 +65,13 @@ class Registration extends Component {
                 valid: false,
                 touched: false
             }
-        }
+        },
+        loading: false
     };
 
-    componentDidMount() {
-
-    }
+    // componentDidMount() {
+    //
+    // }
 
     checkValidity(value, rules) {
         let isValid = true;
@@ -103,7 +107,18 @@ class Registration extends Component {
             }
         }
         this.setState({registrationForm: updatedForm});
-    }
+    };
+
+    submitHandler = (event) => {
+        event.preventDefault();
+        console.log(this.state.registrationForm.username.value);
+        console.log(this.state.registrationForm.email.value);
+        console.log(this.state.registrationForm.password.value);
+        this.props.onRegister(
+            this.state.registrationForm.username.value,
+            this.state.registrationForm.email.value,
+            this.state.registrationForm.password.value)
+    };
 
     render() {
         const formElementsArray = [];
@@ -129,13 +144,19 @@ class Registration extends Component {
 
         return (
             <div className={classes.Registration}>
-                <form>
+                <form onSubmit={this.submitHandler}>
                     {form}
-                    <Button variant="success">Zarejestruj</Button>
+                    <Button variant="success" onClick={this.submitHandler}>Zarejestruj</Button>
                 </form>
             </div>
         );
     }
 }
 
-export default Registration;
+const mapDispatchToProps = dispatch => {
+    return {
+        onRegister: (username, email, password) => dispatch(actions.auth(username, email, password))
+    };
+};
+
+export default connect(null, mapDispatchToProps)(Registration);
