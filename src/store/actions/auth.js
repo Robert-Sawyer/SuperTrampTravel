@@ -22,15 +22,20 @@ export const authFail = (error) => {
     };
 };
 
-export const auth = (username, password) => {
+export const auth = (username, email, password) => {
     return dispatch => {
         dispatch(authStart());
-        const authData = {
-            username: username,
-            password: password,
-        }
 
-        axios.post(url, authData)
+        const authData = {
+            id: null,
+            username: username,
+            email: email,
+            password: password,
+            enabled: 0,
+            roles: null
+        };
+
+        axios.post("192.168.1.177:8080/users/register.json", authData)
             .then(response => {
                 dispatch(authSuccess(response.data));
 
