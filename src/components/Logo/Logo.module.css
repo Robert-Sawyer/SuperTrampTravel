@@ -3,7 +3,7 @@
     background-color: mediumseagreen;
     padding: 5px;
     box-sizing: border-box;
-    margin-left: 70px;
+    margin-left: 80px;
     width: 550px;
 }
 
@@ -16,6 +16,8 @@
     left: 20px;
     letter-spacing: 5px;
     padding: 0;
+    font-family: Jokerman;
+    letter-spacing: 12px;
 }
 
 .Logo img {

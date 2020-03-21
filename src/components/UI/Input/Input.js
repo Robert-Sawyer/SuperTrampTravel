@@ -26,8 +26,22 @@ const input = (props) => {
     }
 
     let validationError = null;
+    let validationOfUsername = null;
+    let validationOfEmail = null;
+    let validationOfPassword = null;
+
     if (props.invalid && props.touched) {
         validationError = <p className={classes.ValidationError}>Wprowadź poprawne dane</p>
+    }
+
+    if (props.invalid && props.touched && props.isEmailCorrect) {
+        validationOfEmail = <p className={classes.ValidationError}>Wprowadź poprawny adres e-mail</p>;
+        validationError = validationOfEmail;
+    }
+
+    if(props.invalid && props.touched && props.isPasswordCorrect) {
+        validationOfPassword = <p className={classes.ValidationError}>Hasła nie są identyczne</p>;
+        validationError = validationOfPassword;
     }
 
     return (

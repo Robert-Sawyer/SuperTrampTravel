@@ -63,6 +63,10 @@ class Registration extends Component {
                 touched: false
             }
         }
+    };
+
+    componentDidMount() {
+
     }
 
     checkValidity(value, rules) {
@@ -124,7 +128,7 @@ class Registration extends Component {
         );
 
         return (
-            <div className={classes.Registation}>
+            <div className={classes.Registration}>
                 <form>
                     {form}
                     <Button variant="success">Zarejestruj</Button>
