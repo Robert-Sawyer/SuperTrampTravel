@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import classes from './Registration.css';
+import classes from './Registration.module.css';
+import {Button} from 'react-bootstrap';
+import Input from '../../../components/UI/Input/Input';
 
 class Registration extends Component {
 
@@ -41,7 +43,7 @@ class Registration extends Component {
                 value: '',
                 validation: {
                     required: true,
-                    minLength: 6
+                    minLength: 8
                 },
                 valid: false,
                 touched: false
@@ -63,9 +65,71 @@ class Registration extends Component {
         }
     }
 
+    checkValidity(value, rules) {
+        let isValid = true;
+
+        if (!rules) {
+            return true;
+        }
+
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+
+        if (rules.isEmail) {
+            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+            isValid = pattern.test(value) && isValid;
+        }
+
+        if (rules.minLength) {
+            isValid = value.length >= rules.minLength && isValid;
+        }
+
+        return isValid;
+    }
+
+    inputChangedHandler = (event, inputName) => {
+        const updatedForm = {
+            ...this.state.registrationForm,
+            [inputName]: {
+                ...this.state.registrationForm[inputName],
+                value: event.target.value,
+                valid: this.checkValidity(event.target.value, this.state.registrationForm[inputName].validation),
+                touched: true
+            }
+        }
+        this.setState({registrationForm: updatedForm});
+    }
+
     render() {
+        const formElementsArray = [];
+        for (let key in this.state.registrationForm) {
+            formElementsArray.push({
+                id: key,
+                config: this.state.registrationForm[key]
+            });
+        }
+
+        let form = formElementsArray.map(formElement => (
+                <Input
+                    key={formElement.id}
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value}
+                    invalid={!formElement.config.valid}
+                    shouldValidate={formElement.config.validation}
+                    touched={formElement.config.touched}
+                    changed={(event) => this.inputChangedHandler(event, formElement.id)}/>
+            )
+        );
+
         return (
-            <div></div>
+            <div className={classes.Registation}>
+                <form>
+                    {form}
+                    <Button variant="success">Zarejestruj</Button>
+                </form>
+            </div>
         );
     }
 }
