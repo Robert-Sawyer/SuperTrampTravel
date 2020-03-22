@@ -5,6 +5,7 @@ import {Button} from 'react-bootstrap';
 import Input from '../../../components/UI/Input/Input';
 import axios from 'axios';
 import * as actions from '../../../store/actions/index';
+import {authFail, authSuccess} from "../../../store/actions/auth";
 
 class Registration extends Component {
 
@@ -69,9 +70,9 @@ class Registration extends Component {
         loading: false
     };
 
-    // componentDidMount() {
-    //
-    // }
+    componentDidMount() {
+
+    }
 
     checkValidity(value, rules) {
         let isValid = true;
@@ -111,13 +112,43 @@ class Registration extends Component {
 
     submitHandler = (event) => {
         event.preventDefault();
+
+        this.setState({
+            loading: true
+        })
+
         console.log(this.state.registrationForm.username.value);
         console.log(this.state.registrationForm.email.value);
         console.log(this.state.registrationForm.password.value);
-        this.props.onRegister(
-            this.state.registrationForm.username.value,
-            this.state.registrationForm.email.value,
-            this.state.registrationForm.password.value)
+
+        const authData = {
+            id: null,
+            username: this.state.registrationForm.username.value,
+            email: this.state.registrationForm.email.value,
+            password: this.state.registrationForm.password.value,
+            enabled: 0,
+            roles: null
+        };
+        console.log(authData);
+
+        axios.post("users/register", authData)
+            .then(response => response.json())
+            .then(response => {
+                this.setState({
+                    loading: false
+                });
+
+            })
+            .catch(err => {
+                this.setState({
+                    loading: false
+                })
+            })
+
+        // this.props.onRegister(
+        //     this.state.registrationForm.username.value,
+        //     this.state.registrationForm.email.value,
+        //     this.state.registrationForm.password.value)
     };
 
     render() {
@@ -153,10 +184,16 @@ class Registration extends Component {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onRegister: (username, email, password) => dispatch(actions.auth(username, email, password))
-    };
-};
+// const mapStateToProps = state => {
+//
+// }
 
-export default connect(null, mapDispatchToProps)(Registration);
+// const mapDispatchToProps = dispatch => {
+//     return {
+//         onRegister: (username, email, password) => dispatch(actions.auth(username, email, password))
+//     };
+// };
+//
+// export default connect(null, mapDispatchToProps)(Registration);
+
+export default Registration;

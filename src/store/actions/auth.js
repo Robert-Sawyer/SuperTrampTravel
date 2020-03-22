@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from '../../axios';
 import * as actionTypes from './actionTypes';
 
 export const authStart = () => {
@@ -35,8 +35,9 @@ export const auth = (username, email, password) => {
             roles: null
         };
 
-        axios.post("192.168.1.177:8080/users/register.json", authData)
+        axios.post("users/register.json", authData)
             .then(response => {
+                console.log(authData);
                 dispatch(authSuccess(response.data));
 
             })
