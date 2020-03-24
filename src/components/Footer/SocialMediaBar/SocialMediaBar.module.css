@@ -1,0 +1,14 @@
+.SocialMedia {
+    height: 100%;
+    background-color: mediumseagreen;
+    box-sizing: border-box;
+    margin-left: 80px;
+    width: 550px;
+}
+
+.SocialMedia img {
+    float: left;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 30px;
+}
