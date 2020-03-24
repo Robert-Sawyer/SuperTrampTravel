@@ -1,0 +1,28 @@
+.Footer {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: green;
+    height: 40px;
+    position: fixed;
+}
+
+.CenterBar {
+    width: 80%;
+    align-items: center;
+    margin: auto;
+}
+
+.SocialMedia {
+    width: 80%;
+    position: absolute;
+    margin: auto;
+    float: left;
+    transform: translateY(15%);
+}
+
+.Copyright {
+    float: right;
+    position: relative;
+    transform: translateY(15%);
+}
