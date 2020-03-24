@@ -1,4 +1,7 @@
 .Content {
     margin-top: 65px;
-    /*background-color: #61dafb;*/
+    background-size: 200px 100px;
+    /*margin-bottom: 40px;*/
+    /*min-height: 100%;*/
+    /*!*background-color: #61dafb;*!*/
 }
