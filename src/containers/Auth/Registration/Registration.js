@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import classes from './Registration.module.css';
 import {Button} from 'react-bootstrap';
 import Input from '../../../components/UI/Input/Input';
-import axios from 'axios';
+import axios from '../../../axios';
 import * as actions from '../../../store/actions/index';
 import {authFail, authSuccess} from "../../../store/actions/auth";
 
@@ -70,9 +70,9 @@ class Registration extends Component {
         loading: false
     };
 
-    componentDidMount() {
-
-    }
+    // componentDidMount() {
+    //
+    // }
 
     checkValidity(value, rules) {
         let isValid = true;
@@ -121,7 +121,7 @@ class Registration extends Component {
         console.log(this.state.registrationForm.email.value);
         console.log(this.state.registrationForm.password.value);
 
-        const authData = {
+        const registerData = {
             id: null,
             username: this.state.registrationForm.username.value,
             email: this.state.registrationForm.email.value,
@@ -129,10 +129,10 @@ class Registration extends Component {
             enabled: 0,
             roles: null
         };
-        console.log(authData);
+        console.log(registerData);
 
-        axios.post("users/register", authData)
-            .then(response => response.json())
+        axios.post("users/register", registerData)
+            .then(response => console.log(response))
             .then(response => {
                 this.setState({
                     loading: false
