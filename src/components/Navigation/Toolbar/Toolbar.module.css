@@ -1,5 +1,5 @@
 .Toolbar {
-    height: 65px;
+    height: 66px;
     width: 100%;
     background-color: green;
     top: 0;
@@ -11,6 +11,7 @@
     z-index: 90;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 2px darkslategrey solid;
 }
 
 .Toolbar nav {

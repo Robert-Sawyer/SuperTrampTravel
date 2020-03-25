@@ -9,6 +9,7 @@
 
 .Logo img {
     float: left;
+    height: 100%;
 }
 
 .Logo h1 {
@@ -17,8 +18,4 @@
     padding: 0;
     font-family: Jokerman;
     letter-spacing: 12px;
-}
-
-.Logo img {
-    height: 100%;
 }

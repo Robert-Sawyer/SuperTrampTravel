@@ -5,6 +5,7 @@
     background-color: green;
     height: 40px;
     position: fixed;
+    border-top: 2px solid darkslategrey;
 }
 
 .CenterBar {
