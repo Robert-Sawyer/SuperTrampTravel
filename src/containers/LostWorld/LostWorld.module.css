@@ -2,12 +2,18 @@
     background-color: #61dafb;
     height: 100%;
     width: 100%;
-    background-image: url("../../assets/images/background.jpg");
-    /*background-size: contain;*/
-    /*background-repeat: no-repeat;*/
+    position: relative;
+    place-items: center;
+    /*background-image: url("../../assets/images/background.jpg");*/
+    /*background-size: cover;*/
+    /*background-position: center;*/
 }
 
-.LostWorld img {
-    width: 100%;
-    filter: brightness(60%);
+.LostWorld Carousel {
+    top: 100px;
 }
+
+/*.LostWorld img {*/
+/*    width: 100%;*/
+/*    filter: brightness(60%);*/
+/*}*/

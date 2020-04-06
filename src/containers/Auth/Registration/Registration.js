@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 import classes from './Registration.module.css';
 import {Button} from 'react-bootstrap';
 import Input from '../../../components/UI/Input/Input';
-import axios from '../../../axios';
-import * as actions from '../../../store/actions/index';
-import {authFail, authSuccess} from "../../../store/actions/auth";
+import {signup} from '../../../utils/utils';
+// import axios from '../../../axios';
+// import * as actions from '../../../store/actions/index';
+// import {authFail, authSuccess} from "../../../store/actions/auth";
 
 class Registration extends Component {
 
@@ -106,7 +107,7 @@ class Registration extends Component {
                 valid: this.checkValidity(event.target.value, this.state.registrationForm[inputName].validation),
                 touched: true
             }
-        }
+        };
         this.setState({registrationForm: updatedForm});
     };
 
@@ -115,11 +116,7 @@ class Registration extends Component {
 
         this.setState({
             loading: true
-        })
-
-        console.log(this.state.registrationForm.username.value);
-        console.log(this.state.registrationForm.email.value);
-        console.log(this.state.registrationForm.password.value);
+        });
 
         const registerData = {
             id: null,
@@ -131,24 +128,9 @@ class Registration extends Component {
         };
         console.log(registerData);
 
-        axios.post("users/register", registerData)
+        signup(registerData)
             .then(response => console.log(response))
-            .then(response => {
-                this.setState({
-                    loading: false
-                });
-
-            })
-            .catch(err => {
-                this.setState({
-                    loading: false
-                })
-            })
-
-        // this.props.onRegister(
-        //     this.state.registrationForm.username.value,
-        //     this.state.registrationForm.email.value,
-        //     this.state.registrationForm.password.value)
+            .catch(err => console.log(err))
     };
 
     render() {
